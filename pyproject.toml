@@ -1,0 +1,45 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "mt5-mcp"
+version = "0.2.0"
+description = "MCP Server and EMA Martingale Bot for MetaTrader 5"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+keywords = ["mcp", "metatrader", "mt5", "trading", "forex", "claude", "ai", "bot"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Financial and Insurance Industry",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Office/Business :: Financial :: Investment",
+]
+dependencies = [
+    "mcp[cli]>=1.9.0",
+    "MetaTrader5>=5.0.45",
+    "numpy>=1.26",
+    "pyyaml>=6.0",
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.31.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.24",
+]
+
+[project.scripts]
+mt5-mcp = "mt5_mcp.server:main"
+ema-bot = "ema_bot.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/ema_bot", "src/bot_server", "src/mt5_mcp"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
