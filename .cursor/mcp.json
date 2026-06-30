@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "mt5": {
+      "command": "py",
+      "args": ["-m", "mt5_mcp.server"],
+      "env": {
+        "MT5_MCP_DEMO_ONLY": "true",
+        "MT5_MCP_TRADING_ENABLED": "true",
+        "EMA_BOT_DB_PATH": "data/bot_state.db"
+      }
+    }
+  }
+}

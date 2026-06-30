@@ -1,0 +1,38 @@
+# EMA Martingale Bot configuration
+
+symbols:
+  - XAUUSD
+
+poll_interval_sec: 60.0
+timeframe_minutes: 1
+
+# Pine Script "EMA" — entries only on EMA 9/21 cross
+# bullish cross → EMA Long | bearish cross → EMA Short
+# On cross: if P&L > 0 close all then enter fresh; if negative martingale add
+ema_fast: 9
+ema_slow: 21
+
+initial_lot_size: 0.01
+next_multiplier: 3.0
+deviation: 1.5
+
+magic: 234567
+max_position_count: 0  # 0 = unlimited
+max_lot_size: 1.0
+
+demo_only: true
+trading_enabled: true
+db_path: data/bot_state.db
+
+api_host: 127.0.0.1
+api_port: 8000
+
+# Secure Profit — per open position, every poll:
+# unrealized > $5  → move SL to lock 50% of that position's profit
+# unrealized > $10 → move SL to lock 75% (ratchets up, never down)
+secure_profit_enabled: true
+sp_threshold_half: 5.0
+sp_threshold_three_quarter: 10.0
+
+# When any leg's stop-loss is hit and net P&L is positive, close all open positions
+sl_hit_close_all: true
